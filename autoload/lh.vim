@@ -35,7 +35,7 @@ fun! lh#backup_file(...)
     let bkname = b:lh_dir.lh#sep().fname." ".bkname
     silent exe '!cp '.fnameescape(resolve(expand("%:p"))).' '.fnameescape(bkname)
     redraw!
-    echom "Created ".bkname
+    call s:lh_echom("Created ".bkname)
 endfun
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -62,7 +62,7 @@ fun! lh#delete_backups(...)
         let path = fnameescape(s:dir.lh#sep().file)
         silent execute '!rm '.path
         redraw!
-        echom "Deleted ".path
+        call s:lh_echom("Deleted ".path)
     endfor
 endfun
 
@@ -136,8 +136,15 @@ fun! lh#bufenter()
         if !filereadable(bkname)
             silent exe '!cp '.fnameescape(file).' '.fnameescape(bkname)
             redraw!
-            echom "Created ".bkname
+            call s:lh_echom("Created ".bkname)
         endif
     endif
 endfun
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+fun! s:lh_echom(s)
+    if !exists('g:lh_quiet')
+        echom a:s
+    endif
+endfun

@@ -78,6 +78,10 @@ Set to 0 if you prefer horizontal split for diff windows:
 
     `let g:lh_vert_diff = 0`
 
+To perform backups silently:
+
+    let g:lh_quiet = 1
+
 
 
 AUTOBACKUP                                             *localhistory-autobackup*
